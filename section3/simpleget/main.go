@@ -1,13 +1,18 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
+	"net/url"
 )
 
 func main() {
-	resp, err := http.Get("http://localhost:18888")
+	v := url.Values{
+		"query": {"hello,world"},
+	}
+	resp, err := http.Get(fmt.Sprintf("http://localhost:18888?%s", v.Encode()))
 	if err != nil {
 		panic(err)
 	}
